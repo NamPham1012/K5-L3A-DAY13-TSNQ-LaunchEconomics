@@ -7,16 +7,18 @@
 #   b) Theo nhân viên, m = 75: DE = 2,48; 3.103 yêu cầu = 42 nhân viên mỗi nhóm, tổng 84 > 40 nhân viên: không đủ người.
 #   c) 20 nhân viên mỗi nhóm: cỡ mẫu hiệu dụng tối đa 20/0,02 = 1.000 < 1.251: không đạt mức chênh 5 điểm.
 #   d) 6 depot mỗi nhóm: cỡ mẫu hiệu dụng tối đa 6/0,02 = 300: không đạt, và chỉ 6 cụm.
-#   e) Mức chênh 6 điểm (859 mỗi nhóm), 20 nhân viên mỗi nhóm: m >= 299 yêu cầu mỗi người, DE = 6,96.
+#   e) Mức chênh 6 điểm: cần 859 quan sát hiệu dụng mỗi nhóm. Với 20 nhân viên,
+#      m >= 299 yêu cầu/người, tức 5.980 yêu cầu thực tế mỗi nhóm; DE = 6,96,
+#      cỡ mẫu hiệu dụng 5.980 / 6,96 ≈ 859,20 mỗi nhóm.
 #
 # D2 · Năm câu kiểm tra "tách được tác động" với cách chia đã chọn (chia theo nhân viên, 20 + 20):
 #   1. Đối chứng chạy cùng thời gian: có, 20 nhân viên đối chứng làm cùng tuần, cùng depot.
 #   2. Chia ngẫu nhiên hay do người chọn: bốc thăm bằng code, seed ghi trước, phân tầng theo depot.
 #   3. Ảnh hưởng gián tiếp và cách giảm: có thể chia sẻ câu trả lời trong depot; giảm bằng quyền truy cập theo tài khoản và log lượt mở trợ lý theo staff_id.
-#   4. Chỉ số chính, ngưỡng, ngày quyết định đã viết trước: có, chốt trong file này trước ngày bắt đầu.
+#   4. Chỉ số chính, ngưỡng và ngày quyết định cần được chốt trong file này trước ngày bắt đầu.
 #   5. Ít nhất 20 cụm mỗi nhóm: có, đúng 20.
 #
-# Đánh đổi đã chấp nhận (nếu cách chia chưa đạt cả hai điều kiện): chấp nhận mức chênh phát hiện được 6 điểm thay vì 5.
+# Đánh đổi đề xuất, chờ phê duyệt: mức chênh phát hiện được 6 điểm thay vì 5.
 #   Nếu tác động thật chỉ +5 điểm thì power còn khoảng 0,64 (ước tính theo hướng dẫn lab). Giám đốc vận hành phải ký chấp nhận trước khi bắt đầu.
 #
 # Tỉ lệ mo_lai_trong_7_ngay hiện tại và ngưỡng an toàn đã chọn: hiện tại 51/1.200 = 4,25% (phạm vi noi_dia + hang_nang: 39/982 = 3,97%).
@@ -36,15 +38,19 @@ pilot:
     mde: 0.06                     # đánh đổi đã chấp nhận, xem chú thích đầu file
     alpha: 0.05
     power: 0.80
-    n_per_arm: 859
+    n_per_arm: 5980               # số yêu cầu thực tế tối thiểu mỗi nhóm, không phải số hiệu dụng
+    effective_n_per_arm_min: 859 # mục tiêu theo công thức so hai tỉ lệ
+    requests_per_staff_min: 299
     design_effect: 6.96
     clusters_per_arm: 20
   identifiability:
     concurrent_control: "Có: 20 nhân viên đối chứng làm cùng tuần, cùng depot với nhóm dùng trợ lý"
     spillover_risk: "Chia sẻ câu trả lời giữa nhân viên cùng depot; giảm bằng quyền truy cập theo tài khoản và log lượt mở trợ lý theo staff_id"
-    predeclared: "Chỉ số chính, ngưỡng, luật dừng và ngày quyết định chốt trong file này, trước ngày bắt đầu pilot"
+    predeclared: "Chỉ số chính, ngưỡng, luật dừng và ngày quyết định phải được chốt trước ngày bắt đầu pilot; ngày trong file đang chờ xác nhận"
+    measurement_window: "Sau khi đạt bước 0,50, thu ít nhất 299 yêu cầu đủ điều kiện cho mỗi nhân viên của mỗi nhóm; chỉ phân tích khi từng yêu cầu đã được theo dõi đủ 7 ngày. Nếu không đạt mẫu hoặc thời gian theo dõi trước ngày quyết định, chưa kết luận hiệu quả và trình Giám đốc vận hành điều chỉnh kế hoạch."
   stop_rules:
-    - "NẾU tỉ lệ mở lại 7 ngày của nhóm trợ lý cao hơn đối chứng từ 2 điểm trở lên hoặc vượt 6%, hoặc có từ 1 ca hoàn trùng TRONG 3 ngày liên tiếp THÌ Giám đốc vận hành tắt trợ lý trong 30 phút KHÔNG THÌ không được sang bước rollout tiếp theo"
+    - "NẾU tỉ lệ mở lại 7 ngày của nhóm trợ lý cao hơn đối chứng từ 2 điểm trở lên hoặc vượt 6% TRONG 3 ngày liên tiếp THÌ Giám đốc vận hành tắt trợ lý trong 30 phút KHÔNG THÌ không được sang bước rollout tiếp theo"
+    - "NẾU phát hiện từ 1 ca hoàn trùng TRONG bất kỳ ngày nào THÌ Giám đốc vận hành tắt trợ lý trong 30 phút và kiểm tra sổ cái KHÔNG THÌ không được tiếp tục xử lý ca bị ảnh hưởng bằng trợ lý"
     - "NẾU chi phí mỗi việc thành công trên 8.000 đ TRONG 2 tuần liên tiếp THÌ PM trợ lý hoàn phí thu hẹp về noi_dia và giới hạn 2 lần chạy KHÔNG THÌ không được mở hang_nang"
     - "NẾU tỉ lệ bỏ qua gợi ý (sửa hoặc bỏ) trên 40% TRONG 1 tuần THÌ Trưởng nhóm CSKH phỏng vấn 5 nhân viên trong 3 ngày KHÔNG THÌ không được chuyển bước rollout"
   interim_looks: "chỉ kiểm tra chỉ số an toàn"
