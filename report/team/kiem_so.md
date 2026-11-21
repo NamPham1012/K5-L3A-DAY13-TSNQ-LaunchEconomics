@@ -29,6 +29,9 @@ Theo công thức hai tỉ lệ của đề, z(0,975) ≈ 1,95996, z(0,80) ≈ 0
 - 20 nhân viên/nhóm: cỡ mẫu hiệu dụng luôn nhỏ hơn 20/0,02 = **1.000**, không đạt 1.251. Sáu depot/nhóm: luôn nhỏ hơn **300**.
 - Với p2 = 0,76: n = 858,27, làm tròn lên **859**. Giải 20m/(1 + (m − 1) × 0,02) ≥ 859 được **m ≥ 299**, với DE = **6,96**. Điều này chỉ là tính toán theo các giả định cỡ cụm bằng nhau và ICC của đề.
 
-## Việc nhóm cần hoàn tất
+## Trạng thái chuyển số
 
-Chuyển các số đã kiểm vào `bang_chi_phi.md`, phần D1 của `pilot_plan.yaml` và các hồ sơ liên quan; người kiểm số và người viết code cần tự giải thích công thức. Nhóm vẫn phải làm nhãn độc lập, chọn phương án pilot và thực hiện duyệt chéo thực tế.
+- **Đã chuyển:** các số A, B ở trên đã nằm trong `bang_chi_phi.md` và `ho_so_launch_v0.md`; số D1 nằm trong phần chú thích và `primary_metric` của `pilot_plan.yaml` (1.251 · 2,48 và 3.103 · 1.000 · 300 · 859, m = 299, DE 6,96). Các số này khớp `src/ket_qua_lab13.txt`.
+- **Phương án pilot đã chọn:** chia theo nhân viên, 20 + 20, chấp nhận mức chênh 6 điểm (power khoảng 0,64 nếu tác động thật là 5 điểm); Giám đốc vận hành cần ký chấp nhận.
+- **Người kiểm số và người viết code (Nam):** cần tự giải thích được công thức — tử số tính mọi lần chạy, mẫu số chỉ đếm `thanh_cong`; DE = 1 + (m − 1) × ICC và cỡ mẫu hiệu dụng khi chia theo cụm.
+- **Chưa làm:** phiếu gốc của hai bộ nhãn độc lập (xem `bang_loi.md`) và duyệt chéo thực tế (`phieu_cham.md`).
