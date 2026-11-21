@@ -30,7 +30,7 @@ Phụ trách gắn nhãn 20 ca lỗi, xây dựng bảng khắc phục và tổn
 
 Sử dụng Codex để review nội dung, nhận gợi ý triển khai và xác định các điểm cần kiểm tra. Tôi chịu trách nhiệm đối chiếu số liệu với output chương trình, kiểm tra nguồn và hoàn thiện nội dung cuối cùng.
 
-Codex hỗ trợ soạn lý do từng ca, bảng khắc phục, hồ sơ launch và nội dung báo cáo; trực tiếp chạy chương trình và cung cấp kết quả. Nhãn người 2 do tôi tự gắn, không dùng AI để tạo nhãn.
+Codex hỗ trợ review phần bài làm, hỗ trợ triển khai phân tích các yêu cầu; 
 
 Cách tự kiểm tra: đối chiếu mọi con số trong hồ sơ với `src/ket_qua_lab13.txt` và `bang_chi_phi.md`; tự đếm số ca trùng giữa hai cột nhãn; rà toàn bộ hồ sơ để không dùng từ bị cấm theo RULES.md; kiểm tra mỗi mục hồ sơ có vai trò phụ trách và số giả lập có nhãn `simulated`.
 
