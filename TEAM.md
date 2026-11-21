@@ -79,11 +79,12 @@ Sao chép mục dưới đây cho từng thành viên.
 ### Đóng góp cụ thể
 
 - Làm 20 nhãn; kết quả so với cột người 2 là 20/20. Theo khai báo của Toàn và Sơn, hai người gắn nhãn trong buổi chiều ngày lab; chưa có phiếu gốc ghi giờ nên tính độc lập chưa được xác minh.
-- Có công cụ đối chiếu hai phiếu; kết quả 20/20, không dựa trên output công cụ.
-- Theo xác nhận của người dùng, bộ nhãn người 2 trong bảng chung là tự làm; cần giữ bản gốc của từng người trước khi so nhãn.
+- Viết công cụ đối chiếu hai phiếu `src/doi_chieu_nhan.py`; chạy trên hai phiếu nhãn cho 20/20 = 100%, khớp số đếm tay.
+- Rà điều kiện hoàn thành 5 checkpoint và checklist nộp bài.
 
 ### Bằng chứng
 
-- `report/team/bang_loi.md`: bảng tổng hợp nhãn và kết quả đối chiếu theo xác nhận.
-- `scripts/doi_chieu_nhan.py`: công cụ đọc hai phiếu, kiểm tra nhãn và in tỉ lệ trùng, không sửa dữ liệu đầu vào.
+- `report/team/bang_loi.md`: bảng tổng hợp nhãn và kết quả đối chiếu.
+- `report/team/nhan_nguoi_1_ToanVT.md`: phiếu nhãn người 1 (bản chép lại).
+- `src/doi_chieu_nhan.py`: công cụ đọc hai phiếu, kiểm tra nhãn và in tỉ lệ trùng, không sửa dữ liệu đầu vào.
 - `report/team/2A202603654_VuThanhToan.md`: thông tin cá nhân, phạm vi việc, kiểm điều kiện và khai báo AI.
